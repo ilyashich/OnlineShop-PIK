@@ -26,11 +26,11 @@
                <manifest>
                   <addClasspath>true</addClasspath>
                   <classpathPrefix>lib/</classpathPrefix>
-                  <mainClass>com.mypackage.MyClass</mainClass>
+                  <mainClass>HelloMaven</mainClass>
                </manifest>
             </archive>
             </configuration>
          </plugin>
       </plugins>
-</build>
+   </build>
 </project>
