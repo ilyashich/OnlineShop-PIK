@@ -10,7 +10,7 @@
     
    <distributionManagement>
       <snapshotRepository>
-         <id>nexus-snapshots</id>
+         <id>deploymentRepo</id>
          <url>http://localhost:8081/repository/maven-snapshots/</url>
       </snapshotRepository>
    </distributionManagement>
