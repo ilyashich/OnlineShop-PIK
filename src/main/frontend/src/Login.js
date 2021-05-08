@@ -1,12 +1,27 @@
 import React from 'react';
 import './Login.css';
+import UserDataService from "./UserDataService";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: ''};
-        //this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {username: '', password: '', user: null};
+    }
+
+    // fetchUsers = () => {
+    //     UserDataService.getUsers().then((response) => this.setState({users: response.data}))
+    //     console.log('InGetUsers' + this.state.users);
+    // }
+
+    //fetch user of specific login and password from backend, right now fetches Mark and his password only
+    fetchUser = () => {
+        UserDataService.getUserByLoginAndPassword().then((response) => this.setState({user: response.data}))
+    }
+
+
+    componentDidMount = () => {
+        // this.fetchUsers();
+        this.fetchUser();
     }
 
     handleChange = (event) => {
@@ -21,8 +36,17 @@ class Login extends React.Component {
     handleSubmit = (event) => {
         alert('Username is: ' + this.state.username +
             '\nPassword is: ' + this.state.password);
+        console.log(this.state.user.login);
+        if (this.state.user.login === this.state.username &&
+            this.state.user.password === this.state.password) {
+            alert('Login successful');
+        }
+        else {
+            alert('Login unsuccessful');
+        }
         event.preventDefault(); //to avoid reloading page
     }
+
     render() {
         return(
             <div className="Login">
