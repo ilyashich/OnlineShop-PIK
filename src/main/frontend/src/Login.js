@@ -5,46 +5,41 @@ import UserDataService from "./UserDataService";
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: '', user: null};
+        this.state = {login: '', password: '', user: null};
     }
 
-    // fetchUsers = () => {
-    //     UserDataService.getUsers().then((response) => this.setState({users: response.data}))
-    //     console.log('InGetUsers' + this.state.users);
+    // componentDidMount = () => {
+    //     // this.fetchUsers();
+    //     UserDataService.getUserByLoginAndPassword(this.state.login, this.state.password).then(
+    //         (response) => this.setState({user: response.data}));
     // }
 
-    //fetch user of specific login and password from backend, right now fetches Mark and his password only
-    fetchUser = () => {
-        UserDataService.getUserByLoginAndPassword().then((response) => this.setState({user: response.data}))
-    }
-
-
-    componentDidMount = () => {
-        // this.fetchUsers();
-        this.fetchUser();
-    }
-
     handleChange = (event) => {
-        if (event.target.name === "username") {
-            this.setState({username: event.target.value});
+        if (event.target.name === "login") {
+            this.setState({login: event.target.value});
         }
         else if (event.target.name === "password") {
             this.setState({password: event.target.value});
         }
     }
 
-    handleSubmit = (event) => {
-        alert('Username is: ' + this.state.username +
+    check = (event, response) => {
+        this.setState({user: response.data});
+        alert('Username is: ' + this.state.login +
             '\nPassword is: ' + this.state.password);
-        console.log(this.state.user.login);
-        if (this.state.user.login === this.state.username &&
+        if (this.state.user.login === this.state.login &&
             this.state.user.password === this.state.password) {
             alert('Login successful');
         }
         else {
             alert('Login unsuccessful');
         }
-        event.preventDefault(); //to avoid reloading page
+    }
+
+    handleSubmit = (event) => {
+        UserDataService.getUserByLoginAndPassword(this.state.login, this.state.password).then((response) =>
+            this.check(event, response));
+        event.preventDefault(); //to avoid reloading page);
     }
 
     render() {
@@ -54,8 +49,8 @@ class Login extends React.Component {
                 <form onSubmit = {this.handleSubmit}>
                     <label id = "username">
                         Username<br/>
-                        <input type="text" name="username"
-                               value = {this.state.username} onChange = {this.handleChange}/>
+                        <input type="text" name="login"
+                               value = {this.state.login} onChange = {this.handleChange}/>
                     </label>
                     <br/>
                     <label id = "password">
@@ -64,7 +59,7 @@ class Login extends React.Component {
                                value = {this.state.password} onChange = {this.handleChange}/>
                     </label>
                     <br/>
-                    <input type="submit" value="Confirm" />
+                    <input type="submit" value="Confirm"/>
                 </form>
             </div>
 

@@ -8,8 +8,9 @@ class UserDataService {
         return axios.get(USERS_URL);
     }
 
-    getUserByLoginAndPassword = () => {
-        return axios.get(USERS_URL + "/Mark/admin123");
+    getUserByLoginAndPassword = (login, password) => {
+        console.log("inUserDataService " + USERS_URL + "/" + login + "/" + password);
+        return axios.get(USERS_URL + '/' + login + '/' + password);
     }
 }
 
