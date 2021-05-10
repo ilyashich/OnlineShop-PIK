@@ -5,7 +5,14 @@ import org.springframework.data.neo4j.core.DatabaseSelectionProvider;
 import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.stereotype.Service;
 
+
+import org.neo4j.driver.types.TypeSystem;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Michael Hunger
@@ -59,4 +66,25 @@ public class MovieService {
 		}
 		return "test";
 	}
+
+	public List<MovieResultDto> searchMoviesByTitle(String title) {
+		return this.movieRepository.findSearchResults(title)
+				.stream()
+				.map(MovieResultDto::new)
+				.collect(Collectors.toList());
+	}
+
+//	public List<MovieResultDto> getMovies() {
+//		List<String> result = null;
+//		List<Record> records;
+//		try (Session session = sessionFor(database())) {
+//			records = session.readTransaction(tx -> tx.run(
+//					"MATCH (n:Movie) RETURN n.title"
+//			).list());
+//			for (Record record : records) {
+//				result.add(record.toString());
+//			}
+//		}
+//		return result;
+//	}
 }
