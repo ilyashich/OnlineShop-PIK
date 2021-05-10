@@ -9,6 +9,12 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+        this.login = "";
+        this.password = "";
+    }
+
+
     public String getLogin() {
         return login;
     }
