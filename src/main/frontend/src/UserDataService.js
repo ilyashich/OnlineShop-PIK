@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 const USERS_URL = 'users';
+// const USERS_URL = 'users';
 
 class UserDataService {
     getUsers = () => {
