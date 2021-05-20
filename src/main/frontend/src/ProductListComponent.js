@@ -17,6 +17,13 @@ class ProductListComponent extends React.Component {
         ProductDataService.getProducts().then((response) => this.setState({products: response.data}));
     }
 
+    removeProduct(name) {
+        const products = [...this.state.products];
+        const updatedList = products.filter(item => item.name !== name);
+        this.setState({ products: updatedList });
+    }
+
+
     render() {
         return (
             <div>
@@ -31,7 +38,10 @@ class ProductListComponent extends React.Component {
                         this.state.products.map(
                             product =>
                                 <tr key = {product.name}>
-                                    <td>{product.name}</td>
+                                    <td>
+                                        {product.name}
+                                        <button onClick={() => this.removeProduct(product.name)}>x</button>
+                                    </td>
                                 </tr>
                         )
                     }
