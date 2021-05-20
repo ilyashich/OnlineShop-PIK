@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class LoginJDBC {
+public class UserRepository {
     ArrayList<User> userList;
-    LoginJDBC(){ }
+    UserRepository(){ }
 
     public void readLogins()
     {

@@ -10,19 +10,19 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/")
 public class UserController {
-    LoginJDBC loginJDBC = new LoginJDBC();
+    UserRepository userRepository = new UserRepository();
     ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
             new User("Mark", "admin123"), new User("Adam", "qwerty")));
 
 
     @GetMapping("/users")
     public ArrayList<User> getUsers() {
-        return loginJDBC.getUsers();
+        return userRepository.getUsers();
     }
 
     @GetMapping("/users/{login}/{password}")
     public User getUserByLoginAndPassword(@PathVariable("login") String login, @PathVariable("password") String password) {
-        for (User user: loginJDBC.getUsers()) {
+        for (User user: userRepository.getUsers()) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 //loginJDBC.addUser(new User("Malcolm2", "qwertyu"));
                 //loginJDBC.removeUser(new User("Malcolm2", "qwertyu"));
@@ -35,7 +35,7 @@ public class UserController {
     @PostMapping("/users")
     public boolean addUser(@RequestBody User newUser) {
         if (getUserByLogin(newUser.getLogin()) == null) {
-            loginJDBC.addUser(newUser);
+            userRepository.addUser(newUser);
             return true;
         }
         return false;
@@ -53,7 +53,7 @@ public class UserController {
 
     @GetMapping("/users/{login}")
     public User getUserByLogin(@PathVariable("login") String login) {
-        for (User user: loginJDBC.getUsers()) {
+        for (User user: userRepository.getUsers()) {
             if (user.getLogin().equals(login)) {
                 return user;
             }
