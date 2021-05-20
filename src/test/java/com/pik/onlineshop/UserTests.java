@@ -1,30 +1,32 @@
 package com.pik.onlineshop;
 
-import com.pik.onlineshop.authentication.LoginController;
+import com.pik.onlineshop.authentication.UserController;
 import com.pik.onlineshop.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 @SpringBootTest
-class LoginTests {
+class UserTests {
 
 //    @Test
 //    @DisplayName("Get user by login and password")
 //    void getUserByLoginAndPassword() {
 //        User user1 = new User("Adam", "qwerty");
-//        LoginController logCont = new LoginController();
+//        UserController logCont = new UserController();
 //        User user2 = logCont.getUserByLoginAndPassword("Adam", "qwerty");
-//        Assertions.assertEquals(user1.getLogin(), user2.getLogin());
-//        Assertions.assertEquals(user1.getPassword(), user2.getPassword());
+//        Assertions.assertEquals(user1, user2);
 //    }
-
+//
 //    @Test
 //    @DisplayName("Get nonexistent user by login and password")
 //    void getNonexistentUserByLoginAndPassword() {
-//        LoginController logCont = new LoginController();
-//        User user = logCont.getUserByLoginAndPassword("Malcolm", "qwerty");
+//        UserController logCont = new UserController();
+//        User user = logCont.getUserByLoginAndPassword("Dave", "qwerty123");
 //        Assertions.assertNull(user);
 //    }
 
@@ -37,4 +39,15 @@ class LoginTests {
         Assertions.assertEquals(user.getLogin(), "Adam");
         Assertions.assertEquals(user.getPassword(), "qwerty");
     }
+
+//    @Test
+//    @DisplayName("Add user")
+//    void addUser() {
+//        ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
+//                new User("Malcolm", "qwerty"), new User("Adam", "qwerty"),
+//                new User("Dave", "passwd")));
+//        UserController logCont = new UserController();
+//        logCont.addUser(new User("Dave", "passwd"));
+//        Assertions.assertEquals(users, logCont.getUsers());
+//    }
 }

@@ -10,6 +10,10 @@ public class Product {
     @Id
     private String name;
 
+    public Product() {
+        this.name = "";
+    }
+
     public Product(String name) {
         this.name = name;
     }

@@ -1,11 +1,11 @@
 import React from 'react';
-import './Login.css';
+import './Register.css';
 import UserDataService from "./UserDataService";
 
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {login: '', password: '', user: null};
+        this.state = {login: '', password: '', canAdd: false, user: null};
     }
 
     // componentDidMount = () => {
@@ -23,29 +23,40 @@ class Login extends React.Component {
         }
     }
 
-    check = (event, response) => {
-        this.setState({user: response.data});
-        alert('Username is: ' + this.state.login +
-            '\nPassword is: ' + this.state.password);
-        if (this.state.user.login === this.state.login &&
-            this.state.user.password === this.state.password) {
-            alert('Login successful');
+    // checkIfExists = (event, response) => {
+    //     this.setState({user: response.data});
+    //     alert('Username is: ' + this.state.login +
+    //         '\nPassword is: ' + this.state.password);
+    //     if (this.state.user.login === this.state.login) {
+    //         alert('User exists');
+    //     }
+    //     else {
+    //         this.setState({canAdd: true});
+    //         console.log('CanAdd: ' + this.state.canAdd);
+    //         alert('User can be registered');
+    //     }
+    // }
+
+    printStatus = (event, response) => {
+        this.setState({canAdd: response.data});
+        if (this.state.canAdd === true) {
+            alert('User successfully registered');
         }
         else {
-            alert('Login unsuccessful');
+            alert('User already exists');
         }
     }
 
     handleSubmit = (event) => {
-        UserDataService.getUserByLogin(this.state.login).then((response) =>
-            this.check(event, response));
-        event.preventDefault(); //to avoid reloading page);
+        UserDataService.addUser(this.state.login, this.state.password).then((response) =>
+            this.printStatus(event, response));
+        event.preventDefault(); //to avoid reloading page;
     }
 
     render() {
         return(
-            <div className="Login">
-                <h1>Login</h1>
+            <div className="Register">
+                <h1>Register</h1>
                 <form onSubmit = {this.handleSubmit}>
                     <label id = "username">
                         Username<br/>
@@ -67,4 +78,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Register;

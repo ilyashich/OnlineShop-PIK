@@ -1,6 +1,6 @@
 package com.pik.onlineshop;
 
-import com.pik.onlineshop.authentication.LoginController;
+import com.pik.onlineshop.authentication.UserController;
 import com.pik.onlineshop.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
