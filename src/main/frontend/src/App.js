@@ -1,12 +1,13 @@
 import './App.css';
 import Login from './Login.js';
-import UserComponent from './UserComponent';
+import ProductListComponent from "./ProductListComponent";
 
 function App() {
   return (
     <div className="App">
       {/*<header className="App-header">*/}
-        <Login />
+        <Login id="login"/>
+        <ProductListComponent id="product list"/>
           {/*<UserComponent />*/}
       {/*</header>*/}
     </div>
