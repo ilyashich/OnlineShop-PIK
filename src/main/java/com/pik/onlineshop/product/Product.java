@@ -1,8 +1,13 @@
 package com.pik.onlineshop.product;
 
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+
 import java.util.Objects;
 
+@Node
 public class Product {
+    @Id
     private String name;
 
     public Product(String name) {
