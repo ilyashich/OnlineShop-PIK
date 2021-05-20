@@ -13,7 +13,7 @@ public class LoginJDBC {
     ArrayList<User> userList;
     LoginJDBC(){ }
 
-    public void init()
+    public void readLogins()
     {
         try {
             Class.forName("org.postgresql.Driver");
@@ -24,21 +24,10 @@ public class LoginJDBC {
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/postgres");
 
             if (ds == null) {
-                System.out.println("Data source is null");
                 throw new Exception("Data source not found!");
             }
             else
                 {
-//            Class.forName("org.postgresql.Driver");
-//            String url = "jdbc:postgresql://localhost:5432/clients";
-//
-//            Properties props = new Properties();
-//            props.setProperty("user","shopadmin");
-//            props.setProperty("password","");
-//
-//            DriverManager.getConnection(url, props);
-
-                //Connection connection = DriverManager.getConnection(url, props);
 
                 Connection connection = ds.getConnection();
 
@@ -53,18 +42,55 @@ public class LoginJDBC {
                     }
                     connection.close();
                 }
-//            }
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
 
+    public void updateLogins(String sqlCommand){
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            Context ctx = new InitialContext();
+            if (ctx == null)
+                throw new Exception("Boom - No Context");
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/postgres");
+
+            if (ds == null) {
+                throw new Exception("Data source not found!");
+            }
+            else
+            {
+
+                Connection connection = ds.getConnection();
+
+                if (connection != null) {
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sqlCommand);
+                    connection.close();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<User> getUsers(){
+        readLogins();
         return userList;
+    }
+
+    public void addUser(User user){
+        updateLogins("INSERT INTO logins VALUES ( '" + user.getLogin() + "', '" + user.getPassword() + "')");
+    }
+
+    public void removeUser(User user){
+        updateLogins("DELETE FROM logins WHERE login ='"+user.getLogin()+"'");
     }
 
 }
