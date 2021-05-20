@@ -1,4 +1,4 @@
-package com.pik.onlineshop.movies;
+package com.pik.onlineshop.product;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
