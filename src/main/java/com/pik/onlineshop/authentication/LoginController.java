@@ -10,16 +10,22 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/")
 public class LoginController {
+
     ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
             new User("Mark", "admin123"), new User("Adam", "qwerty")));
 
+
     @GetMapping("/users")
     public ArrayList<User> getUsers() {
-        return users;
+        LoginJDBC loginJDBC = new LoginJDBC();
+        loginJDBC.init();
+        return loginJDBC.getUsers();
     }
 
     @GetMapping("/users/{login}/{password}")
     public User getUserByLoginAndPassword(@PathVariable("login") String login, @PathVariable("password") String password) {
+        LoginJDBC loginJDBC = new LoginJDBC();
+        loginJDBC.init();
         for (User user: users) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 return user;
