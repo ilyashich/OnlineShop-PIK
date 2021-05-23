@@ -8,10 +8,6 @@ class UserDataService {
         return axios.get(USERS_URL);
     }
 
-    getUserByLogin = (login) => {
-        return axios.get(USERS_URL + '/' + login);
-    }
-
     getUserByLoginAndPassword = (login, password) => {
         return axios.get(USERS_URL + '/' + login + '/' + password);
     }

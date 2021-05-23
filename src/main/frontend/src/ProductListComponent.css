@@ -1,0 +1,13 @@
+.ProductList {
+    background-color: CadetBlue;
+    border-style: groove;
+    border-color: grey;
+    border-width: 5px;
+    color: white;
+    border-radius: 20px;
+    width: 500px;
+    text-align: center;
+    position: absolute;
+    top: 100px;
+    right: 600px;
+}

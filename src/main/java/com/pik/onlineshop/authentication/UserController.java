@@ -14,7 +14,6 @@ public class UserController {
     ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
             new User("Mark", "admin123"), new User("Adam", "qwerty")));
 
-
     @GetMapping("/users")
     public ArrayList<User> getUsers() {
         return userRepository.getUsers();
