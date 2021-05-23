@@ -9,8 +9,8 @@
     width: 200px;
     text-align: center;
     position: absolute;
-    top: 300px;
-    right: 400px;
+    top: 10px;
+    left: 30px;
 }
 
 form {

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
 import UserDataService from "./UserDataService";
+import {Link} from "react-router-dom";
 
 class Login extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class Login extends React.Component {
     }
 
     handleSubmit = (event) => {
-        UserDataService.getUserByLogin(this.state.login).then((response) =>
+        UserDataService.getUserByLoginAndPassword(this.state.login, this.state.password).then((response) =>
             this.check(event, response));
         event.preventDefault(); //to avoid reloading page);
     }
@@ -61,6 +62,7 @@ class Login extends React.Component {
                     <br/>
                     <input type="submit" value="Confirm"/>
                 </form>
+                <Link to="/register" className="registerlink">Register</Link>
             </div>
 
         )

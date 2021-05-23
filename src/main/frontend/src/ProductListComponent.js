@@ -18,9 +18,9 @@ class ProductListComponent extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="ProductList">
                 <h1>Products</h1>
-                <table id={"table"}>
+                <table id="table">
                     <thead>
                     <tr>
                         <td>Product name</td>
