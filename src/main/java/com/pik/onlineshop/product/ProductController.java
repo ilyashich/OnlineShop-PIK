@@ -27,7 +27,7 @@ public class ProductController {
 
     @PostMapping("/products")
     public boolean addProduct(@RequestBody Product newProduct) {
-        products.add(newProduct);
+        productService.add(newProduct);
         return true;
     }
 }
