@@ -20,5 +20,8 @@ public class ProductService {
         return this.productRepository.save(newProduct);
     }
 
+    public List<Product> getProductsInCategory(String category) {
+        return this.productRepository.findInCategory(category);
+    }
 }
 
