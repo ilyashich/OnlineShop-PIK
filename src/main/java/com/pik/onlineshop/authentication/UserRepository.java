@@ -9,8 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserRepository {
     ArrayList<User> userList;
+
+    PasswordEncoder encoder = new BCryptPasswordEncoder();
+
     UserRepository(){ }
 
     public void readLogins()
@@ -85,8 +91,15 @@ public class UserRepository {
         return userList;
     }
 
+    public PasswordEncoder getEncoder(){
+        return encoder;
+    }
+
     public void addUser(User user){
-        updateLogins("INSERT INTO logins VALUES ( '" + user.getLogin() + "', '" + user.getPassword() + "')");
+        String login = user.getLogin();
+        String password = encoder.encode(user.getPassword());
+
+        updateLogins("INSERT INTO logins VALUES ( '" + login + "', '" + password + "')");
     }
 
     public void removeUser(User user){
