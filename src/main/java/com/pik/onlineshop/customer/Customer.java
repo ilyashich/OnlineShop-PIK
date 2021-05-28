@@ -1,15 +1,25 @@
 package com.pik.onlineshop.customer;
 
+import com.pik.onlineshop.basket.Basket;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Node
 public class Customer {
     @Id
     private final String login;
     private final String name;
+
+    @Relationship(type = "CURRENT", direction = Relationship.Direction.OUTGOING)
+    private Basket currentBasket;
+
+    @Relationship(type = "BOUGHT", direction = Relationship.Direction.OUTGOING)
+    private Set<Basket> boughtBaskets = new HashSet<>();
 
     public Customer(String login, String name) {
         this.login = login;
@@ -22,6 +32,14 @@ public class Customer {
 
     public String getName() {
         return name;
+    }
+
+    public Basket getCurrentBasket() {
+        return currentBasket;
+    }
+
+    public Set<Basket> getBoughtBaskets() {
+        return boughtBaskets;
     }
 
     @Override

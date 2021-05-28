@@ -31,6 +31,11 @@ public class Product {
         return category;
     }
 
+//    Commented to avoid infinite loop between products and baskets
+//    public Set<Basket> getBaskets() {
+//        return baskets;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
