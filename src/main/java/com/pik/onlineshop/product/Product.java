@@ -1,8 +1,8 @@
 package com.pik.onlineshop.product;
 
+import com.pik.onlineshop.basket.Basket;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.HashSet;
@@ -31,17 +31,22 @@ public class Product {
         return category;
     }
 
+//    Commented to avoid infinite loop between products and baskets
+//    public Set<Basket> getBaskets() {
+//        return baskets;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(name, product.name);
+        return Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(baskets, product.baskets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, category, baskets);
     }
 }
 
