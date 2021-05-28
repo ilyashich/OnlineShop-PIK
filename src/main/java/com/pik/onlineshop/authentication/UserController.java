@@ -22,9 +22,8 @@ public class UserController {
     @GetMapping("/users/{login}/{password}")
     public User getUserByLoginAndPassword(@PathVariable("login") String login, @PathVariable("password") String password) {
         for (User user: userRepository.getUsers()) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                //loginJDBC.addUser(new User("Malcolm2", "qwertyu"));
-                //loginJDBC.removeUser(new User("Malcolm2", "qwertyu"));
+            if (user.getLogin().equals(login) && userRepository.getEncoder().matches(password, user.getPassword())) {
+                user.setPassword(password);
                 return user;
             }
         }
