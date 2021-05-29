@@ -6,6 +6,9 @@ class ProductListComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {products: []};
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -14,6 +17,13 @@ class ProductListComponent extends React.Component {
 
     handleClick = (event) => {
         ProductDataService.getProducts().then((response) => this.setState({products: response.data}));
+    }
+
+    handleDelete = (event) => {
+        ProductDataService.deleteProduct(event.target.value).then((response) =>
+            this.setState({products: response.data}));
+        event.preventDefault();
+
     }
 
     render() {
@@ -30,7 +40,10 @@ class ProductListComponent extends React.Component {
                         this.state.products.map(
                             product =>
                                 <tr key = {product.name}>
-                                    <td>{product.name}</td>
+                                    <td>
+                                        {product.name}
+                                        <button id="delete-button" value={product.name} onClick={this.handleDelete}>-</button>
+                                    </td>
                                 </tr>
                         )
                     }

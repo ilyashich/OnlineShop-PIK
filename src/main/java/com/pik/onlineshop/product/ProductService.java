@@ -22,5 +22,10 @@ public class ProductService {
     public List<Product> getProductsInCategory(String category) {
         return this.productRepository.findInCategory(category);
     }
+
+    public void deleteProduct(Product oldProduct)
+    {
+        this.productRepository.delete(oldProduct);
+    }
 }
 
