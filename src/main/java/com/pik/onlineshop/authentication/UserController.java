@@ -17,6 +17,7 @@ public class UserController {
     UserRepository userRepository = new UserRepository();
     ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
             new User("Mark", "admin123"), new User("Adam", "qwerty")));
+
     @ModelAttribute("User")
     public User setSessionUser() {
         return new User();
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/sessiontest/{login}/{password}")
-    public User getUserTest(@PathVariable("login") String login, @PathVariable("password") String password,
+    public User setSessionUser(@PathVariable("login") String login, @PathVariable("password") String password,
                             @ModelAttribute("User") User sessionUser, final Model model) {
         for (User user: userRepository.getUsers()) {
             if (user.getLogin().equals(login) && userRepository.getEncoder().matches(password, user.getPassword())) {
@@ -57,7 +58,7 @@ public class UserController {
 
     @GetMapping("/sessiontest")
     public User getSessionUser(@ModelAttribute("User") User sessionUser) {
-        return null; // zwracanie czegoś innego niż null daje błąd
+        return sessionUser;
     }
 
     @PostMapping("/users")
@@ -78,5 +79,4 @@ public class UserController {
         }
         return null;
     }
-
 }
