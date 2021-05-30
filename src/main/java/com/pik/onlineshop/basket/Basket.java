@@ -8,6 +8,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Node
@@ -15,19 +16,19 @@ public class Basket {
     @Id
     private final Integer id;
     private final ZonedDateTime date;
-
     @Relationship(type = "IN", direction = Relationship.Direction.INCOMING)
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products;
 
-    @Relationship(type = "CURRENT", direction = Relationship.Direction.INCOMING)
-    private Customer customerCurrent;
+//    @Relationship(type = "CURRENT", direction = Relationship.Direction.INCOMING)
+//    private Customer customerCurrent;
+//
+//    @Relationship(type = "BOUGHT", direction = Relationship.Direction.INCOMING)
+//    private Customer customerBought;
 
-    @Relationship(type = "BOUGHT", direction = Relationship.Direction.INCOMING)
-    private Customer customerBought;
-
-    public Basket(Integer id, ZonedDateTime date) {
+    public Basket(Integer id, ZonedDateTime date, List<Product> products) {
         this.id = id;
         this.date = date;
+        this.products = products;
     }
 
     public Integer getId() {
@@ -38,7 +39,7 @@ public class Basket {
         return date;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
