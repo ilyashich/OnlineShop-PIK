@@ -10,8 +10,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 interface BasketRepository extends Neo4jRepository<Basket, Integer> {
-    Basket showBasket(@Param("name") String customerName);
-    Basket addProduct(@Param("name") String productName);
-    Basket deleteProduct(@Param("name") String productName);
+    Basket showBasket(@Param("customerName") String customerName);
+    Basket addProduct(@Param("customerName") String customerName, @Param("productName") String productName);
+    Basket deleteProduct(@Param("customerName") String customerName, @Param("productName") String productName);
 }
 
