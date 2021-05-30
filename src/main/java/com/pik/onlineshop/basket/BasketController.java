@@ -26,6 +26,14 @@ public class BasketController {
         return basketService.showBasket(user);
     }
 
+    @GetMapping("/addtobasket")
+    public Basket addProduct(@SessionAttribute("User") User user, String productName){
+        return basketService.addProduct(user, productName);
+    }
 
+    @GetMapping("/deletefrombasket")
+    public Basket deleteProduct(@SessionAttribute("User") User user, String productName){
+        return basketService.deleteProduct(user, productName);
+    }
 
 }

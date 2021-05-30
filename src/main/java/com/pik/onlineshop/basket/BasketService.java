@@ -23,4 +23,12 @@ public class BasketService {
     public Basket showBasket(User user) {
         return this.basketRepository.showBasket(user.getLogin());
     }
+
+    public Basket addProduct(User user, String productName){
+        return this.basketRepository.addProduct(user.getLogin(), productName);
+    }
+
+    public Basket deleteProduct(User user, String productName){
+        return this.basketRepository.deleteProduct(user.getLogin(), productName);
+    }
 }
