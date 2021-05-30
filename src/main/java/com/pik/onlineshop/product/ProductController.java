@@ -27,5 +27,11 @@ public class ProductController {
     public List<Product> getProductsInCategory(@PathVariable("category") String category) {
         return productService.getProductsInCategory(category);
     }
+
+    @DeleteMapping("/products")
+    public void deleteProduct(@RequestBody Product oldProduct)
+    {
+        productService.deleteProduct(oldProduct);
+    }
 }
 
