@@ -56,5 +56,8 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
             "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
             "RETURN basket, collect(r), collect(product) AS products")
     List<Basket> deleteProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
+
+    @Query
+    Basket buyBasket(@Param("customerLogin") String customerLogin);
 }
 
