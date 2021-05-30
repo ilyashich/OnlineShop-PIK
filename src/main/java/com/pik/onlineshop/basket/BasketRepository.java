@@ -10,18 +10,40 @@ import java.time.LocalDate;
 import java.util.List;
 
 interface BasketRepository extends Neo4jRepository<Basket, Integer> {
-    @Query("MATCH (customer:Customer)-[:CURRENT]->(basket:Basket) WHERE customer.login = $customerLogin RETURN basket")
-    // TODO: Create basket if doesn't exist
-    Basket showBasket(@Param("customerLogin") String customerLogin);
+    @Query("MATCH (:Customer)-[:CURRENT]->(basket:Basket)\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(products:Product)\n" +
+            "RETURN DISTINCT basket, collect(r), collect(products)")
+    List<Basket> findAllCurrent();
+
+    @Query("MATCH (:Customer)-[:BOUGHT]->(basket:Basket)\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(products:Product)\n" +
+            "RETURN DISTINCT basket, collect(r), collect(products)")
+    List<Basket> findAllBought();
+
+    @Query("MATCH (customer:Customer)\n" +
+            "WHERE customer.login = $customerLogin\n" +
+            "MERGE (customer)-[:CURRENT]->(basket:Basket)\n" +
+            "ON CREATE\n" +
+            "   SET basket.id = id(basket)\n" +
+            "WITH basket\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
+            "RETURN basket, collect(r), collect(product) AS products")
+    List<Basket> showBasket(@Param("customerLogin") String customerLogin);
 
     @Query("MATCH (customer:Customer)-[:CURRENT]->(basket:Basket)\n" +
             "WHERE customer.login = $customerLogin\n" +
             "MATCH (product:Product)\n" +
             "WHERE product.name = $productName\n" +
             "WITH basket, product\n" +
-            "CREATE (basket)<-[:IN {amount: 1}]-(product) \n" +
-            "RETURN basket")
-    Basket addProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
+            "MERGE (basket)<-[r:IN]-(product)\n" +
+            "ON CREATE\n" +
+            "   SET r.amount = 1\n" +
+            "ON MATCH\n" +
+            "   SET r.amount = r.amount + 1\n" +
+            "WITH basket\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
+            "RETURN basket, collect(r), collect(product) AS products")
+    List<Basket> addProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
 
     @Query("MATCH (customer:Customer)-[:CURRENT]->(basket:Basket)\n" +
             "WHERE customer.login = $customerLogin\n" +
@@ -30,7 +52,9 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
             "WITH basket, product\n" +
             "MATCH (basket)<-[r:IN]-(product) \n" +
             "DELETE r\n" +
-            "RETURN basket")
-    Basket deleteProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
+            "WITH basket\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
+            "RETURN basket, collect(r), collect(product) AS products")
+    List<Basket> deleteProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
 }
 

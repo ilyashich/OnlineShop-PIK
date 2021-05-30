@@ -20,15 +20,25 @@ public class BasketService {
         return this.basketRepository.findAll();
     }
 
-    public Basket showBasket(User user) {
+    public List<Basket> getCurrentBaskets() {
+        return this.basketRepository.findAllCurrent();
+    }
+
+    public List<Basket> getBoughtBaskets() {
+        return this.basketRepository.findAllBought();
+    }
+
+    public List<Basket> showBasket(User user) {
         return this.basketRepository.showBasket(user.getLogin());
     }
 
-    public Basket addProduct(User user, String productName){
+    public List<Basket> addProduct(User user, String productName){
         return this.basketRepository.addProduct(user.getLogin(), productName);
     }
 
-    public Basket deleteProduct(User user, String productName){
+    public List<Basket> deleteProduct(User user, String productName){
         return this.basketRepository.deleteProduct(user.getLogin(), productName);
     }
+
+
 }

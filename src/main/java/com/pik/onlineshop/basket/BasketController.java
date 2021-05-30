@@ -17,22 +17,32 @@ public class BasketController {
     }
 
     @GetMapping("/baskets")
-    public List<Basket> getProducts() {
+    public List<Basket> getAllBaskets() {
         return basketService.getAllBaskets();
     }
 
+    @GetMapping("/currentbaskets")
+    public List<Basket> getCurrentBaskets() {
+        return basketService.getCurrentBaskets();
+    }
+
+    @GetMapping("/boughtbaskets")
+    public List<Basket> getBoughtBaskets() {
+        return basketService.getBoughtBaskets();
+    }
+
     @GetMapping("/showbasket")
-    public Basket showBasket(@SessionAttribute("User") User user){
+    public List<Basket> showBasket(@SessionAttribute("User") User user){
         return basketService.showBasket(user);
     }
 
-    @GetMapping("/addtobasket")
-    public Basket addProduct(@SessionAttribute("User") User user, String productName){
+    @GetMapping("/addtobasket/{productName}")
+    public List<Basket> addProduct(@SessionAttribute("User") User user, @PathVariable("productName") String productName){
         return basketService.addProduct(user, productName);
     }
 
-    @GetMapping("/deletefrombasket")
-    public Basket deleteProduct(@SessionAttribute("User") User user, String productName){
+    @GetMapping("/deletefrombasket/{productName}")
+    public List<Basket> deleteProduct(@SessionAttribute("User") User user, @PathVariable("productName") String productName){
         return basketService.deleteProduct(user, productName);
     }
 
