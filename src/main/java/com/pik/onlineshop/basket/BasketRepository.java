@@ -62,8 +62,11 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
             "SET basket.date = date()\n" +
             "CREATE (customer)-[:CURRENT]->(:Basket)\n" +
             "SET r2 = r\n" +
-            "WITH r\n" +
-            "DELETE r")
-    Basket buyBasket(@Param("customerLogin") String customerLogin); //TODO: Don't allow buying empty baskets
+            "WITH r, basket\n" +
+            "DELETE r\n" +
+            "WITH basket\n" +
+            "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
+            "RETURN basket, collect(r), collect(product) AS products")
+    List<Basket> buyBasket(@Param("customerLogin") String customerLogin); //TODO: Don't allow buying empty baskets
 }
 

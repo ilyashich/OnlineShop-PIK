@@ -46,4 +46,9 @@ public class BasketController {
         return basketService.deleteProduct(user, productName);
     }
 
+    @GetMapping("/buy")
+    public List<Basket> buyBasket(@SessionAttribute("User") User user){
+        return basketService.buyBasket(user);
+    }
+
 }

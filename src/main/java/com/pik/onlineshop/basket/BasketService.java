@@ -40,5 +40,8 @@ public class BasketService {
         return this.basketRepository.deleteProduct(user.getLogin(), productName);
     }
 
+    public List<Basket> buyBasket(User user) {
+        return this.basketRepository.buyBasket(user.getLogin());
+    }
 
 }
