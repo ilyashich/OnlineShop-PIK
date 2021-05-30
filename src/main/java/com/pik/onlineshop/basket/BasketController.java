@@ -1,10 +1,8 @@
 package com.pik.onlineshop.basket;
 
 import com.pik.onlineshop.customer.Customer;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pik.onlineshop.user.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +20,20 @@ public class BasketController {
     public List<Basket> getProducts() {
         return basketService.getAllBaskets();
     }
+
+    @GetMapping("/showbasket")
+    public Basket showBasket(@SessionAttribute("User") User user){
+        return basketService.showBasket(user);
+    }
+
+    @GetMapping("/addtobasket")
+    public Basket addProduct(@SessionAttribute("User") User user, String productName){
+        return basketService.addProduct(user, productName);
+    }
+
+    @GetMapping("/deletefrombasket")
+    public Basket deleteProduct(@SessionAttribute("User") User user, String productName){
+        return basketService.deleteProduct(user, productName);
+    }
+
 }
