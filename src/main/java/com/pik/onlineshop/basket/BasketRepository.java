@@ -57,9 +57,9 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
             "RETURN basket, collect(r), collect(product) AS products")
     List<Basket> deleteProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
 
-    @Query("MATCH (customer:Customer {login: $customerLogin})-[r:CURRENT]->(basket:Basket)\n" +
+    @Query("MATCH (customer:Customer {login: $customerLogin})-[r:CURRENT]->(basket:Basket)<-[:IN]-(:Product)\n" +
             "CREATE (customer)-[r2:BOUGHT]->(basket)\n" +
-            "SET basket.date = date()\n" +
+            "SET basket.date = datetime()\n" +
             "CREATE (customer)-[:CURRENT]->(:Basket)\n" +
             "SET r2 = r\n" +
             "WITH r, basket\n" +
@@ -67,6 +67,6 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
             "WITH basket\n" +
             "OPTIONAL MATCH (basket)<-[r:IN]-(product:Product)\n" +
             "RETURN basket, collect(r), collect(product) AS products")
-    List<Basket> buyBasket(@Param("customerLogin") String customerLogin); //TODO: Don't allow buying empty baskets
+    List<Basket> buyBasket(@Param("customerLogin") String customerLogin);
 }
 
