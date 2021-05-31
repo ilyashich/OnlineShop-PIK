@@ -58,6 +58,7 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
     List<Basket> deleteProduct(@Param("customerLogin") String customerLogin, @Param("productName") String productName);
 
     @Query("MATCH (customer:Customer {login: $customerLogin})-[r:CURRENT]->(basket:Basket)<-[:IN]-(:Product)\n" +
+            "WITH DISTINCT customer, r, basket\n" +
             "CREATE (customer)-[r2:BOUGHT]->(basket)\n" +
             "SET basket.date = datetime()\n" +
             "CREATE (customer)-[:CURRENT]->(:Basket)\n" +
