@@ -7,6 +7,9 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import java.util.List;
 
 interface ProductRepository extends Neo4jRepository<Product, String> {
+    @Query("MERGE (product:Product {name: $name}) RETURN product")
+    Product addProduct(@Param("name") String newProductName);
+
     @Query("MATCH (product:Product) WHERE product.category = $category RETURN product")
     List<Product> findInCategory(@Param("category") String category);
 }

@@ -16,15 +16,14 @@ public class ProductService {
     }
 
     public Product addProduct(Product newProduct) {
-        return this.productRepository.save(newProduct);
+        return this.productRepository.addProduct(newProduct.getName());
     }
 
     public List<Product> getProductsInCategory(String category) {
         return this.productRepository.findInCategory(category);
     }
 
-    public void deleteProduct(Product oldProduct)
-    {
+    public void deleteProduct(Product oldProduct) {
         this.productRepository.delete(oldProduct);
     }
 }
