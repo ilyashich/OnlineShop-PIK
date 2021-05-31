@@ -59,7 +59,7 @@ interface BasketRepository extends Neo4jRepository<Basket, Integer> {
 
     @Query("MATCH (customer:Customer {login: $customerLogin})-[r:CURRENT]->(basket:Basket)\n" +
             "CREATE (customer)-[r2:BOUGHT]->(basket)\n" +
-            "SET basket.date = date()\n" +
+            "SET basket.date = datetime()\n" +
             "CREATE (customer)-[:CURRENT]->(:Basket)\n" +
             "SET r2 = r\n" +
             "WITH r, basket\n" +
