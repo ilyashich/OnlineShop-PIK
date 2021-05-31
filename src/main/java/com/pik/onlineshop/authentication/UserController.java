@@ -1,5 +1,6 @@
 package com.pik.onlineshop.authentication;
 
+import com.pik.onlineshop.customer.CustomerRepository;
 import com.pik.onlineshop.user.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,13 @@ import java.util.Arrays;
 @RequestMapping("/")
 public class UserController {
     UserRepository userRepository = new UserRepository();
+    private final CustomerRepository customerRepository;
     ArrayList<User> users = new ArrayList<>(Arrays.asList(new User("John", "123"),
             new User("Mark", "admin123"), new User("Adam", "qwerty")));
+
+    UserController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @ModelAttribute("User")
     public User setSessionUser() {
@@ -65,6 +71,8 @@ public class UserController {
     public boolean addUser(@RequestBody User newUser) {
         if (getUserByLogin(newUser.getLogin()) == null) {
             userRepository.addUser(newUser);
+            //add customer to Neo4j
+            customerRepository.addCustomer(newUser.getLogin());
             return true;
         }
         return false;
