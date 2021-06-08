@@ -8,9 +8,9 @@ class ProductDataService {
         return axios.get(PRODUCTS_URL);
     }
 
-    addProduct = (name) => {
+    addProduct = (name, category) => {
         console.log('Product name in dataservice: ' + name);
-        return axios.post(PRODUCTS_URL, {name: name});
+        return axios.post(PRODUCTS_URL, {name: name, category: category});
     }
 
     deleteProduct = (name) =>{

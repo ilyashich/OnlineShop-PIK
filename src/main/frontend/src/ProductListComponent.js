@@ -20,9 +20,10 @@ class ProductListComponent extends React.Component {
     }
 
     handleDelete = (event) => {
-        ProductDataService.deleteProduct(event.target.value).then((response) =>
-            this.setState({products: response.data}));
+        ProductDataService.deleteProduct(event.target.value).then(() =>{});
+        ProductDataService.getProducts().then((response) => this.setState({products: response.data}));
         event.preventDefault();
+        alert("Product successfully deleted");
 
     }
 

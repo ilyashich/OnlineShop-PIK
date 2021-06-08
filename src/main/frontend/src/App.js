@@ -5,6 +5,7 @@ import Register from "./Register.js";
 import AddProductComponent from "./AddProductComponent";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import { createBrowserHistory } from 'history';
+import ModifyProductComponent from "./ModifyProductComponent";
 
 export const history = createBrowserHistory({
     basename: process.env.PUBLIC_URL
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/">
                     <ProductListComponent id="product list"/>
                     <AddProductComponent />
+                    <ModifyProductComponent/>
                     <Link to="/login" className="loginlink">Login</Link>
                 </Route>
             </Switch>

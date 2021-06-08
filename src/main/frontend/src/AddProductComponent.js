@@ -5,12 +5,18 @@ import ProductDataService from "./ProductDataService";
 class AddProductComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {name: '', canAdd: false};
+        this.state = {name: '', category: '', canAdd: false};
     }
 
-    handleChange = (event) => {
+    handleNameChange = (event) => {
         if (event.target.name === "name") {
             this.setState({name: event.target.value});
+        }
+    }
+
+    handleCategoryChange = (event) => {
+        if (event.target.name === "category") {
+            this.setState({category: event.target.value});
         }
     }
 
@@ -20,7 +26,7 @@ class AddProductComponent extends React.Component {
     }
 
     handleSubmit = (event) => {
-        ProductDataService.addProduct(this.state.name).then((response) =>
+        ProductDataService.addProduct(this.state.name, this.state.category).then((response) =>
             this.printStatus(event, response));
         event.preventDefault(); //to avoid reloading page;
     }
@@ -33,7 +39,12 @@ class AddProductComponent extends React.Component {
                     <label id = "name">
                         Name<br/>
                         <input type="text" name="name"
-                               value = {this.state.name} onChange = {this.handleChange}/>
+                               value = {this.state.name} onChange = {this.handleNameChange}/>
+                    </label>
+                    <label id = "category">
+                        Category<br/>
+                        <input type="text" name="category"
+                               value = {this.state.category} onChange = {this.handleCategoryChange}/>
                     </label>
                     <br/>
                     <input type="submit" value="Confirm"/>
