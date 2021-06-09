@@ -12,6 +12,10 @@ class UserDataService {
         return axios.get(USERS_URL + '/' + login + '/' + password);
     }
 
+    setSessionUser = (login, password) => {
+        return axios.get('sessiontest' + '/' + login + '/' + password);
+    }
+
     addUser = (login, password) => {
         return axios.post(USERS_URL, {login: login, password: password});
     }

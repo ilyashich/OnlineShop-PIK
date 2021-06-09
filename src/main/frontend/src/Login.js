@@ -30,6 +30,7 @@ class Login extends React.Component {
             '\nPassword is: ' + this.state.password);
         if (this.state.user.login === this.state.login &&
             this.state.user.password === this.state.password) {
+            UserDataService.setSessionUser(this.state.login, this.state.password).then(()=>{});
             alert('Login successful');
         }
         else {

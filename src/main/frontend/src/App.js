@@ -16,19 +16,19 @@ function App() {
     <div className="App">
         <BrowserRouter>
             <Switch>
-                <Route path="/login">
+                <Route path="/online-shop/login">
                     <Login id="login"/>
-                    <Link to="/" className="back">Back</Link>
+                    <Link to="/online-shop" className="back">Back</Link>
                 </Route>
-                <Route path="/register">
+                <Route path="/online-shop/register">
                     <Register />
-                    <Link to="/login" className="back">Back</Link>
+                    <Link to="/online-shop/login" className="back">Back</Link>
                 </Route>
-                <Route path="/">
+                <Route path="/online-shop">
                     <ProductListComponent id="product list"/>
                     <AddProductComponent />
                     <ModifyProductComponent/>
-                    <Link to="/login" className="loginlink">Login</Link>
+                    <Link to="/online-shop/login" className="loginlink">Login</Link>
                 </Route>
             </Switch>
         </BrowserRouter>

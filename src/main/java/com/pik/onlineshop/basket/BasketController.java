@@ -36,12 +36,12 @@ public class BasketController {
         return basketService.showBasket(user);
     }
 
-    @GetMapping("/addtobasket/{productName}")
+    @PostMapping("/addtobasket/{productName}")
     public List<Basket> addProduct(@SessionAttribute("User") User user, @PathVariable("productName") String productName){
         return basketService.addProduct(user, productName);
     }
 
-    @GetMapping("/deletefrombasket/{productName}")
+    @DeleteMapping("/deletefrombasket/{productName}")
     public List<Basket> deleteProduct(@SessionAttribute("User") User user, @PathVariable("productName") String productName){
         return basketService.deleteProduct(user, productName);
     }
