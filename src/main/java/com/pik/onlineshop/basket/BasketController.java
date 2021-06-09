@@ -1,6 +1,5 @@
 package com.pik.onlineshop.basket;
 
-import com.pik.onlineshop.customer.Customer;
 import com.pik.onlineshop.user.User;
 import org.springframework.web.bind.annotation.*;
 

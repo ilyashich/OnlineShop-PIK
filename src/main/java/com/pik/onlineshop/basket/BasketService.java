@@ -1,8 +1,6 @@
 package com.pik.onlineshop.basket;
 
-import com.pik.onlineshop.customer.Customer;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.pik.onlineshop.user.User;
 

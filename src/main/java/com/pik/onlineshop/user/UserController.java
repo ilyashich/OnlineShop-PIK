@@ -1,11 +1,9 @@
-package com.pik.onlineshop.authentication;
+package com.pik.onlineshop.user;
 
-import com.pik.onlineshop.user.User;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 

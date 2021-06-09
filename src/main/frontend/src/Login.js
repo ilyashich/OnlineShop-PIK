@@ -9,12 +9,6 @@ class Login extends React.Component {
         this.state = {login: '', password: '', user: null};
     }
 
-    // componentDidMount = () => {
-    //     // this.fetchUsers();
-    //     UserDataService.getUserByLoginAndPassword(this.state.login, this.state.password).then(
-    //         (response) => this.setState({user: response.data}));
-    // }
-
     handleChange = (event) => {
         if (event.target.name === "login") {
             this.setState({login: event.target.value});

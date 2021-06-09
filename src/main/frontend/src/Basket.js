@@ -2,7 +2,7 @@ import React from 'react';
 import BasketDataService from "./BasketDataService";
 import UserDataService from "./UserDataService";
 import './Basket.css';
-import axios from "axios";
+
 class Basket extends React.Component {
     constructor(props) {
         super(props);

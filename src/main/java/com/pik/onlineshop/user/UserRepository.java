@@ -1,13 +1,9 @@
-package com.pik.onlineshop.authentication;
-
-import com.pik.onlineshop.user.User;
+package com.pik.onlineshop.user;
 
 import javax.naming.*;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

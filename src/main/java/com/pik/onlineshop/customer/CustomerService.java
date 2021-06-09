@@ -1,6 +1,5 @@
 package com.pik.onlineshop.customer;
 
-import com.pik.onlineshop.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

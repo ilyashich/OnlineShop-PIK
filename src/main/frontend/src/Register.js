@@ -8,12 +8,6 @@ class Register extends React.Component {
         this.state = {login: '', password: '', canAdd: false, user: null};
     }
 
-    // componentDidMount = () => {
-    //     // this.fetchUsers();
-    //     UserDataService.getUserByLoginAndPassword(this.state.login, this.state.password).then(
-    //         (response) => this.setState({user: response.data}));
-    // }
-
     handleChange = (event) => {
         if (event.target.name === "login") {
             this.setState({login: event.target.value});
@@ -22,20 +16,6 @@ class Register extends React.Component {
             this.setState({password: event.target.value});
         }
     }
-
-    // checkIfExists = (event, response) => {
-    //     this.setState({user: response.data});
-    //     alert('Username is: ' + this.state.login +
-    //         '\nPassword is: ' + this.state.password);
-    //     if (this.state.user.login === this.state.login) {
-    //         alert('User exists');
-    //     }
-    //     else {
-    //         this.setState({canAdd: true});
-    //         console.log('CanAdd: ' + this.state.canAdd);
-    //         alert('User can be registered');
-    //     }
-    // }
 
     printStatus = (event, response) => {
         this.setState({canAdd: response.data});

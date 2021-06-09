@@ -42,9 +42,4 @@ function App() {
   );
 }
 
-// <Login id="login"/>
-// <ProductListComponent id="product list"/>
-// <Register />
-// <AddProductComponent />
-
 export default App;
