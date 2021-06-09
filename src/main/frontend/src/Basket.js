@@ -2,6 +2,7 @@ import React from 'react';
 import BasketDataService from "./BasketDataService";
 import UserDataService from "./UserDataService";
 import './Basket.css';
+import axios from "axios";
 class Basket extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +27,10 @@ class Basket extends React.Component {
         event.preventDefault();
         alert("Product successfully deleted from basket");
 
+    }
+
+    handleBuy = () => {
+        BasketDataService.buyBasket(this.state.user).then((response) => alert("Bought successfully"))
     }
 
     render() {
@@ -56,6 +61,9 @@ class Basket extends React.Component {
                 </table>
                 <button onClick={this.handleClick}>
                     Refresh
+                </button>
+                <button onClick={this.handleBuy}>
+                    Buy
                 </button>
             </div>
         )
