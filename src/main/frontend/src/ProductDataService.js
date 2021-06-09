@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const PRODUCTS_URL = 'products'; //this for running on tomcat
+const CATEGORIES_URL = 'categories';
 // const PRODUCTS_URL = 'http://localhost:8080/products'; //this for running frontend and backend separately
 
 class ProductDataService {
@@ -20,6 +21,10 @@ class ProductDataService {
 
     getProductsByCategory = (category) => {
         return axios.get(PRODUCTS_URL + '/' + category);
+    }
+
+    getCategories = () => {
+        return axios.get(CATEGORIES_URL);
     }
 }
 
