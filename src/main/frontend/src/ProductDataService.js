@@ -17,6 +17,10 @@ class ProductDataService {
         console.log('Product name in dataservice: ' + name);
         return axios.delete(PRODUCTS_URL, {data :{name: name}});
     }
+
+    getProductsByCategory = (category) => {
+        return axios.get(PRODUCTS_URL + '/' + category);
+    }
 }
 
 export default new ProductDataService();

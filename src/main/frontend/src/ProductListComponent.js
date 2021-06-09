@@ -7,11 +7,13 @@ import BasketDataService from "./BasketDataService";
 class ProductListComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {products: [], user: null, canAdd: false};
+        this.state = {products: [], user: null, canAdd: false, categoryToFilter: '', categories: []};
 
         this.handleClick = this.handleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleAddToBasket = this.handleAddToBasket.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +33,18 @@ class ProductListComponent extends React.Component {
 
     }
 
+    handleCategoryChange(event){
+        if (event.target.name === "category") {
+            this.setState({categoryToFilter: event.target.value});
+        }
+    }
+
+    handleSubmit = (event) => {
+        ProductDataService.getProductsByCategory(this.state.categoryToFilter).then((response) =>
+           this.setState({products: response.data}));
+        event.preventDefault(); //to avoid reloading page;
+    }
+
     printBasketStatus = (event, response) => {
         this.setState({canAdd: response.data});
         alert('Product successfully added to basket');
@@ -46,6 +60,13 @@ class ProductListComponent extends React.Component {
         return (
             <div className="ProductList">
                 <h1>Products</h1>
+                <form onSubmit = {this.handleSubmit}>
+                    <label id = "category">
+                        Filter by category:
+                        <input type="text" name="category"
+                               value = {this.state.categoryToFilter} onChange = {this.handleCategoryChange}/><input type="submit" value="Filter"/>
+                    </label>
+                </form>
                 <table id="table">
                     <thead>
                     <tr  className="ProductListName">
