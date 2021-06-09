@@ -3,6 +3,7 @@ import ProductDataService from './ProductDataService.js';
 import './ProductListComponent.css';
 import UserDataService from "./UserDataService";
 import BasketDataService from "./BasketDataService";
+import Select from 'react-select';
 
 class ProductListComponent extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class ProductListComponent extends React.Component {
 
     componentDidMount() {
         ProductDataService.getProducts().then((response) => this.setState({products: response.data}));
+        ProductDataService.getCategories().then((response) => this.setState({categories: response.data}));
         UserDataService.getSessionUser().then((response) => this.setState({user: response.data}));
     }
 
@@ -60,13 +62,13 @@ class ProductListComponent extends React.Component {
         return (
             <div className="ProductList">
                 <h1>Products</h1>
-                <form onSubmit = {this.handleSubmit}>
-                    <label id = "category">
-                        Filter by category:
-                        <input type="text" name="category"
-                               value = {this.state.categoryToFilter} onChange = {this.handleCategoryChange}/><input type="submit" value="Filter"/>
-                    </label>
-                </form>
+                <select name='category' value={this.state.categoryToFilter} onChange={this.handleCategoryChange}>
+                    <option value=''></option>
+                    {this.state.categories.map(
+                        category =>
+                            <option value={category}>{category}</option>
+                    )}
+                </select><button onClick={this.handleSubmit}>Filter</button>
                 <table id="table">
                     <thead>
                     <tr  className="ProductListName">
