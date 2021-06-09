@@ -19,7 +19,7 @@ function App() {
             <Switch>
                 <Route path="/basket">
                     <Basket id="Basket"/>
-                    <Link to="/online-shop" className="back">Back</Link>
+                    <Link to="/" className="back">Back</Link>
                 </Route>
                 <Route path="/login">
                     <Login id="login"/>
