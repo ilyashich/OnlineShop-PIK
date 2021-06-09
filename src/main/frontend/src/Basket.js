@@ -17,7 +17,7 @@ class Basket extends React.Component {
     }
 
     handleClick = (event) => {
-        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}));
+        BasketDataService.showSessionBasket().then((response) =>this.setState({products: response.data}));
     }
 
     handleDelete = (event) => {
@@ -31,10 +31,10 @@ class Basket extends React.Component {
     render() {
         return (
             <div className="Basket">
-                <h1>Products</h1>
+                <h1>Basket</h1>
                 <table id="table">
                     <thead>
-                    <tr>
+                    <tr className="BasketListName">
                         <td>Product name</td>
                     </tr>
                     </thead>
@@ -44,9 +44,9 @@ class Basket extends React.Component {
                                 basket.products.map(
                                     product =>
                                         <tr key = {product.name}>
-                                            <td>
+                                            <td className="basket-list">
                                                 {product.name}
-                                                <button id="delete-button" value={product.name} onClick={this.handleDelete}>-</button>
+                                                <button id="delete-button" value={product.name} onClick={this.handleDelete}>Delete</button>
                                             </td>
                                         </tr>
                                 )

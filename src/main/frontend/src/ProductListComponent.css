@@ -13,29 +13,56 @@
 }
 
 #delete-button{
+    padding: 10px 15px;
+    border-radius: 5%;
     border: 2px solid black;
     text-align: center;
     text-decoration: none;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    background-color: #f44336;
+    background-color: #ef0505;
     color: white;
     font-size: 15px;
     margin-left: 35px;
     font-weight: bold;
+    right: 20px;
+    cursor: pointer;
+}
+#delete-button:hover {
+    background-color: #a71616
+}
+
+#delete-button:active {
+    background-color: #a71616;
+    transform: translateY(2px);
 }
 
 #add-basket-button{
+    padding: 10px 15px;
     border: 2px solid black;
     text-align: center;
+    border-radius: 5%;
     text-decoration: none;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    background-color: #3cf436;
+    background-color: #31c22d;
     color: white;
     font-size: 15px;
     margin-left: 35px;
     font-weight: bold;
+    right: 20px;
+    cursor: pointer;
+}
+#add-basket-button:hover {
+    background-color: #3e8e41
+}
+
+#add-basket-button:active {
+    background-color: #3e8e41;
+    transform: translateY(2px);
+}
+
+.prod-list{
+    text-align: right;
+    font-size: large;
+}
+
+.ProductListName{
+    text-align: left;
 }

@@ -48,7 +48,7 @@ class ProductListComponent extends React.Component {
                 <h1>Products</h1>
                 <table id="table">
                     <thead>
-                    <tr>
+                    <tr  className="ProductListName">
                         <td>Product name</td>
                     </tr>
                     </thead>
@@ -56,9 +56,9 @@ class ProductListComponent extends React.Component {
                         this.state.products.map(
                             product =>
                                 <tr key = {product.name}>
-                                    <td>
+                                    <td className="prod-list">
                                         {product.name}
-                                        <button id="delete-button" value={product.name} onClick={this.handleDelete}>-</button><button id="add-basket-button" value={product.name} onClick={this.handleAddToBasket}>+</button>
+                                        <button id="delete-button" value={product.name} onClick={this.handleDelete}>Delete</button><button id="add-basket-button" value={product.name} onClick={this.handleAddToBasket}>Add to basket</button>
                                     </td>
                                 </tr>
                         )
