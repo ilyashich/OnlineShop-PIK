@@ -3,7 +3,6 @@ import ProductDataService from './ProductDataService.js';
 import './ProductListComponent.css';
 import UserDataService from "./UserDataService";
 import BasketDataService from "./BasketDataService";
-import Select from 'react-select';
 
 class ProductListComponent extends React.Component {
     constructor(props) {

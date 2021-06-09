@@ -57,7 +57,7 @@ class Login extends React.Component {
                     <br/>
                     <input type="submit" value="Confirm"/>
                 </form>
-                <Link to="/register" className="registerlink">Register</Link>
+                <Link to="/online-shop/register" className="registerlink">Register</Link>
             </div>
 
         )

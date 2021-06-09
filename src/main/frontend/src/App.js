@@ -17,24 +17,24 @@ function App() {
     <div className="App">
         <BrowserRouter>
             <Switch>
-                <Route path="/basket">
+                <Route path="/online-shop/basket">
                     <Basket id="Basket"/>
-                    <Link to="/" className="back">Back</Link>
+                    <Link to="/online-shop" className="back">Back</Link>
                 </Route>
-                <Route path="/login">
+                <Route path="/online-shop/login">
                     <Login id="login"/>
-                    <Link to="/" className="back">Back</Link>
+                    <Link to="/online-shop" className="back">Back</Link>
                 </Route>
-                <Route path="/register">
+                <Route path="/online-shop/register">
                     <Register />
-                    <Link to="/login" className="back">Back</Link>
+                    <Link to="/online-shop/login" className="back">Back</Link>
                 </Route>
-                <Route path="/">
+                <Route path="/online-shop">
                     <ProductListComponent id="product list"/>
                     <AddProductComponent />
                     <ModifyProductComponent/>
-                    <Link to="/login" className="loginlink">Login</Link>
-                    <Link to="/basket" className="basketlink">Basket</Link>
+                    <Link to="/online-shop/login" className="loginlink">Login</Link>
+                    <Link to="/online-shop/basket" className="basketlink">Basket</Link>
                 </Route>
             </Switch>
         </BrowserRouter>
