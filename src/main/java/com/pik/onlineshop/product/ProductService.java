@@ -32,5 +32,9 @@ public class ProductService {
     public List<Product> getRecommendations(User user) {
         return this.productRepository.getRecommendations(user.getLogin());
     }
+
+    public List<String> getCategories() {
+        return this.productRepository.getCategories();
+    }
 }
 
