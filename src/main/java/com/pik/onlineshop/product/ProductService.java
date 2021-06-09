@@ -1,5 +1,6 @@
 package com.pik.onlineshop.product;
 
+import com.pik.onlineshop.user.User;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class ProductService {
     public void deleteProduct(Product oldProduct)
     {
         this.productRepository.delete(oldProduct);
+    }
+
+    public List<Product> getRecommendations(User user) {
+        return this.productRepository.getRecommendations(user.getLogin());
     }
 }
 

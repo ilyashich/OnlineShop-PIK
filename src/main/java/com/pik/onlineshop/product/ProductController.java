@@ -1,5 +1,6 @@
 package com.pik.onlineshop.product;
 
+import com.pik.onlineshop.user.User;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class ProductController {
     public void deleteProduct(@RequestBody Product oldProduct)
     {
         productService.deleteProduct(oldProduct);
+    }
+
+    @GetMapping("/recommendations")
+    public List<Product> getRecommendations(@SessionAttribute("User") User user) {
+        return productService.getRecommendations(user);
     }
 }
 
