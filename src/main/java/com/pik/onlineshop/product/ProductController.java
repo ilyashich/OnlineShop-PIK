@@ -39,5 +39,10 @@ public class ProductController {
     public List<Product> getRecommendations(@SessionAttribute("User") User user) {
         return productService.getRecommendations(user);
     }
+
+    @GetMapping("/categories")
+    public List<String> getCategories() {
+        return productService.getCategories();
+    }
 }
 

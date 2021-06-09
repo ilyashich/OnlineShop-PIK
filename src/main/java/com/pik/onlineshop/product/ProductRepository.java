@@ -18,6 +18,9 @@ interface ProductRepository extends Neo4jRepository<Product, String> {
             "WITH DISTINCT recommendedProduct, MAX(recommendationStrength) AS recommendationStrength\n" +
             "RETURN recommendedProduct, recommendationStrength")
     List<Product> getRecommendations(@Param("customerLogin") String customerLogin);
+
+    @Query("MATCH (n:Product) RETURN DISTINCT n.category")
+    List<String> getCategories();
 }
 
 
