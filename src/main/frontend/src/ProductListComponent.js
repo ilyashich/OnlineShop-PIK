@@ -1,18 +1,22 @@
 import React from 'react';
 import ProductDataService from './ProductDataService.js';
 import './ProductListComponent.css';
+import UserDataService from "./UserDataService";
+import BasketDataService from "./BasketDataService";
 
 class ProductListComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {products: []};
+        this.state = {products: [], user: null, canAdd: false};
 
         this.handleClick = this.handleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleAddToBasket = this.handleAddToBasket.bind(this);
     }
 
     componentDidMount() {
         ProductDataService.getProducts().then((response) => this.setState({products: response.data}));
+        UserDataService.getSessionUser().then((response) => this.setState({user: response.data}));
     }
 
     handleClick = (event) => {
@@ -25,6 +29,17 @@ class ProductListComponent extends React.Component {
         event.preventDefault();
         alert("Product successfully deleted");
 
+    }
+
+    printBasketStatus = (event, response) => {
+        this.setState({canAdd: response.data});
+        alert('Product successfully added to basket');
+    }
+
+    handleAddToBasket = (event) => {
+        BasketDataService.addToBasket(this.state.user, event.target.value).then((response) =>
+            this.printBasketStatus(event,response));
+        event.preventDefault();
     }
 
     render() {
@@ -43,7 +58,7 @@ class ProductListComponent extends React.Component {
                                 <tr key = {product.name}>
                                     <td>
                                         {product.name}
-                                        <button id="delete-button" value={product.name} onClick={this.handleDelete}>-</button>
+                                        <button id="delete-button" value={product.name} onClick={this.handleDelete}>-</button><button id="add-basket-button" value={product.name} onClick={this.handleAddToBasket}>+</button>
                                     </td>
                                 </tr>
                         )

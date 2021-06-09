@@ -2,7 +2,6 @@ import React from 'react';
 import BasketDataService from "./BasketDataService";
 import UserDataService from "./UserDataService";
 import './Basket.css';
-
 class Basket extends React.Component {
     constructor(props) {
         super(props);
@@ -13,13 +12,17 @@ class Basket extends React.Component {
     }
 
     componentDidMount() {
-        UserDataService.getSessionUser().then((response) => this.setState({user: response.data}))
-        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}))
+        UserDataService.getSessionUser().then((response) => this.setState({user: response.data}));
+        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}));
+    }
+
+    handleClick = (event) => {
+        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}));
     }
 
     handleDelete = (event) => {
-        BasketDataService.deleteFromBasket(this.state.user, event.target.value).then(() =>{});
-        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}));
+        BasketDataService.deleteFromBasket(this.state.user, event.target.value).then(() =>{})
+        BasketDataService.showSessionBasket().then((response) => this.setState({products: response.data}))
         event.preventDefault();
         alert("Product successfully deleted from basket");
 
@@ -27,7 +30,7 @@ class Basket extends React.Component {
 
     render() {
         return (
-            <div className="ProductList">
+            <div className="Basket">
                 <h1>Products</h1>
                 <table id="table">
                     <thead>
@@ -51,8 +54,8 @@ class Basket extends React.Component {
                     }
                     </tbody>
                 </table>
-                <button>
-                    Buy
+                <button onClick={this.handleClick}>
+                    Refresh
                 </button>
             </div>
         )

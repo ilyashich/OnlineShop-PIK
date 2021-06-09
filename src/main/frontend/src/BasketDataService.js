@@ -14,12 +14,12 @@ class BasketDataService {
 
     addToBasket = (user, name) => {
         console.log('Product name in basket: ' + name);
-        return axios.post(ADD_TO_BASKET_URL, {user: user, productName: name});
+            return axios.post(ADD_TO_BASKET_URL + '/' + name, {user: user});
     }
 
     deleteFromBasket = (user, name) => {
         console.log('Product name in basket: ' + name);
-        return axios.delete(DELETE_FROM_BASKET_URL, {data: {user: user, productName: name}});
+        return axios.delete(DELETE_FROM_BASKET_URL + '/' + name, {data: {user: user}});
     }
 
     showSessionBasket = (user) => {
